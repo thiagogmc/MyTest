@@ -1,9 +1,9 @@
 <template>
     <div class="form-div">
         <h2>Login</h2>
-        <form action="">
-            <input type="text" name="username" placeholder="Digite seu nome de usuario">
-            <input type="password" name="password" placeholder="Digite sua senha">
+        <form @submit.prevent="loginUser()">
+            <input type="text" name="email" placeholder="Digite seu nome de usuario" v-model="user.email">
+            <input type="password" name="password" placeholder="Digite sua senha" v-model="user.password">
             <button type="submit">Login</button>
         </form>
         <router-link to="/signup">Ainda não possui uma conta? Cadastre-se!</router-link>
@@ -11,8 +11,34 @@
 </template>
 
 <script>
-    export default {
+    import User from '../../domain/User';
 
+    export default {
+        data() {
+            return {
+                user : new User()
+            }
+        },
+
+        methods: {
+            loginUser() {
+                this.$http
+                    .post('login', this.user)
+                    .then(
+                    res => {
+                        let body = res.body;
+                        console.log(body.access_token);
+                    },
+                    err => {
+                        let errorBody = err.body;
+                        if (errorBody.message == 'Unauthorized') {
+                            console.log('Usuario ou senha incorretos');
+                        }
+                    })
+
+
+            }
+        }
     }
 </script>
 <style>
