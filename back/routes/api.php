@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login', 'AuthController@login');
 Route::post('signup', 'AuthController@signup');
+Route::get('account-activation/{token}', 'AuthController@accountActivation');
 
 Route::group([
     'middleware' => 'auth:api'

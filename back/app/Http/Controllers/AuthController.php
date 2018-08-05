@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\ActivateAccount;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -28,6 +29,8 @@ class AuthController extends Controller
 
         $user->save();
 
+        $user->notify(new ActivateAccount($user));
+
         return response()->json([
             'message' => 'Usuário criado com sucesso!'
         ], 201);
@@ -41,6 +44,7 @@ class AuthController extends Controller
         ]);
 
         $credentials = request(['email', 'password']);
+        $credentials['active'] = 1;
 
         if(!Auth::attempt($credentials))
             return response()->json([
@@ -72,5 +76,21 @@ class AuthController extends Controller
         ]);
     }
 
+    public function accountActivation($token)
+    {
+        $user = User::where('activation_token', $token)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'The activation token is invalid.'
+            ], 404);
+        }
+
+        $user->active = true;
+        $user->activation_token = '';
+        $user->save();
+
+        return $user;
+    }
 
 }
