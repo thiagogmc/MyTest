@@ -4,6 +4,8 @@
     <h1>{{ msg }}</h1>
     <form-login>
     </form-login>
+    <sign-up-form>
+    </sign-up-form>
     <h2>Ecosystem</h2>
     <ul>
       <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
@@ -15,11 +17,13 @@
 </template>
 
 <script>
+import signUpForm from './components/signUp/signUp.vue';
 import loginForm from './components/shared/loginForm.vue';
 export default {
 
   components: {
-      'form-login' : loginForm
+      'form-login' : loginForm,
+      'sign-up-form' : signUpForm
   },
   name: 'app',
   data () {
