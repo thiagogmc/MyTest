@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="./assets/logoMT.png">
     <h1>{{ msg }}</h1>
-    <router-view>
-
-    </router-view>
+    <transition name="main-content">
+      <router-view>
+      </router-view>
+    </transition>
     <h2>Ecosystem</h2>
     <ul>
       <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
@@ -60,4 +61,12 @@ li {
 a {
   color: #42b983;
 }
+
+  .main-content-enter, .main-content-leave-active {
+    opacity: 0;
+  }
+
+  .main-content-enter-active, .main-content-leave-active {
+    transition: opacity .2s;
+  }
 </style>

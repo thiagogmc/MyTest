@@ -6,7 +6,7 @@
             <input type="password" name="password" placeholder="Digite sua senha">
             <button type="submit">Login</button>
         </form>
-        <a href="">Ainda não possui uma conta? Cadastre-se!</a>
+        <router-link to="/signup">Ainda não possui uma conta? Cadastre-se!</router-link>
     </div>
 </template>
 

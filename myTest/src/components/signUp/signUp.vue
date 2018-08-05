@@ -8,7 +8,7 @@
             <input type="password" name="password" placeholder="Digite sua senha">
             <button type="submit">Login</button>
         </form>
-        <a href="">Já possui uma conta? Efetue login!</a>
+        <router-link to="/">Já possui uma conta? Efetue login!</router-link>
     </div>
 </template>
 <script>
