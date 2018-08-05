@@ -1,6 +1,9 @@
 <template>
     <div class="form-div">
         <h2>Login</h2>
+        <transition name="error-transition">
+            <p class="error" v-show="visible"> {{ msg }} </p>
+        </transition>
         <form @submit.prevent="loginUser()">
             <input type="text" name="email" placeholder="Digite seu nome de usuario" v-model="user.email">
             <input type="password" name="password" placeholder="Digite sua senha" v-model="user.password">
@@ -16,7 +19,9 @@
     export default {
         data() {
             return {
-                user : new User()
+                user : new User(),
+                msg : 'Erro',
+                visible : false
             }
         },
 
@@ -27,12 +32,14 @@
                     .then(
                     res => {
                         let body = res.body;
-                        console.log(body.access_token);
+                        localStorage.token = body.access_token;
+                        this.$router.push('profile');
                     },
                     err => {
                         let errorBody = err.body;
                         if (errorBody.message == 'Unauthorized') {
-                            console.log('Usuario ou senha incorretos');
+                            this.visible = true;
+                            this.msg = 'Usuario ou senha incorretos';
                         }
                     })
 
@@ -66,5 +73,21 @@
         padding: 10px;
         color: white;
         font-size: 1em;
+    }
+
+    .error {
+        padding: 15px;
+        background-color: rgba(255, 0, 0, 0.5);
+        border: 1px solid red;
+        border-radius: 5px;
+        color: white;
+    }
+
+    .error-transition-enter, .error-transition-leave-active {
+        opacity: 0;
+    }
+
+    .error-transition-enter-active, .error-transition-leave-active {
+        transition: opacity .2s;
     }
 </style>

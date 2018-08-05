@@ -13,6 +13,13 @@ const router = new VueRouter({
   mode: 'history'
 });
 
+Vue.http.interceptors.push((request, next) => {
+    if (localStorage.getItem('token')) {
+      request.headers.set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+    }
+    next()
+})
+
 new Vue({
   el: '#app',
   router,

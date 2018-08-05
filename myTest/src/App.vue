@@ -1,24 +1,16 @@
 <template>
   <div id="app">
     <img src="./assets/logoMT.png">
-    <h1>{{ msg }}</h1>
     <transition name="main-content">
       <router-view>
       </router-view>
     </transition>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
   </div>
 </template>
 
 <script>
 import signUpForm from './components/signUp/signUp.vue';
-import loginForm from './components/shared/loginForm.vue';
+import loginForm from './components/login/loginForm.vue';
 export default {
 
   components: {
