@@ -13,14 +13,17 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
+            'username' => 'required|string|unique:users',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required'
+            'password' => 'required|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'
         ]);
 
         $user = new User([
             'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'activation_token' => md5(str_random(50))
         ]);
 
         $user->save();
