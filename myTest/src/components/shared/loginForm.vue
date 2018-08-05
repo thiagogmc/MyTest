@@ -10,7 +10,7 @@
     </div>
 </template>
 
-<script scoped>
+<script>
     export default {
 
     }
@@ -41,5 +41,4 @@
         color: white;
         font-size: 1em;
     }
-
 </style>

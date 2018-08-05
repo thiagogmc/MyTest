@@ -2,10 +2,9 @@
   <div id="app">
     <img src="./assets/logo.png">
     <h1>{{ msg }}</h1>
-    <form-login>
-    </form-login>
-    <sign-up-form>
-    </sign-up-form>
+    <router-view>
+
+    </router-view>
     <h2>Ecosystem</h2>
     <ul>
       <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
