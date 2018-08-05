@@ -40,7 +40,8 @@ class ActivateAccount extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/api/account-activation/'. $notifiable->token);
+        $url = url('/api/account-activation/'. $notifiable->activation_token);
+
         return (new MailMessage)
                     ->subject('Confirme sua conta no Mytest!')
                     ->line('Obrigado por se inscrever no Mytest.
