@@ -44,7 +44,6 @@ class AuthController extends Controller
         ]);
 
         $credentials = request(['email', 'password']);
-        $credentials['active'] = 1;
 
         if(!Auth::attempt($credentials))
             return response()->json([
@@ -91,6 +90,11 @@ class AuthController extends Controller
         $user->save();
 
         return $user;
+    }
+
+    public function user(Request $request)
+    {
+        return response()->json($request->user());
     }
 
 }
