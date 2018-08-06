@@ -32,7 +32,7 @@ class AuthController extends Controller
         $user->notify(new ActivateAccount($user));
 
         return response()->json([
-            'message' => 'Usuário criado com sucesso!'
+            'message' => 'User created successfully!'
         ], 201);
     }
 
