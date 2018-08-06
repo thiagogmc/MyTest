@@ -7,10 +7,18 @@
             </div>
         </transition>
         <form @submit.prevent="registerUser()">
-            <input type="text" name="name" placeholder="Digite seu nome completo" v-model="user.name">
-            <input type="text" name="username" placeholder="Digite seu nome de usuario" v-model="user.username">
-            <input type="email" name="email" placeholder="Digite seu email" v-model="user.email">
-            <input type="password" name="password" placeholder="Digite sua senha" v-model="user.password">
+            <input v-validate data-vv-rules="required|min:10|max:100" type="text" name="name" placeholder="Digite seu nome completo" v-model="user.name">
+            <span v-show="errors.has('name')">{{ errors.first('name') }}</span>
+
+            <input v-validate data-vv-rules="required" type="text" name="username" placeholder="Digite seu nome de usuario" v-model="user.username">
+            <span v-show="errors.has('username')">{{ errors.first('username') }}</span>
+
+            <input v-validate data-vv-rules="required" type="email" name="email" placeholder="Digite seu email" v-model="user.email">
+            <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
+
+            <input v-validate data-vv-rules="required|min:6|regex:^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$"  type="password" name="password" placeholder="Digite sua senha" v-model="user.password">
+            <span v-show="errors.has('password')">{{ errors.first('password') }}</span>
+            <br>
             <button type="submit">Cadastrar</button>
         </form>
         <router-link to="/">Já possui uma conta? Efetue login!</router-link>
@@ -30,23 +38,28 @@
 
         methods: {
             registerUser() {
-                console.log('clicou');
-                this.$http
-                    .post('signup', this.user)
-                    .then(
-                        res => {
-                            let body = res.body;
-                            localStorage.token = body.access_token;
-                            this.$router.push('/');
-                        },
-                        err => {
-                            let errorBody = err.body;
-                            console.log(errorBody);
-                            if (errorBody.errors) {
-                                this.msgs = errorBody.errors;
-                                this.visible = true;
-                            }
-                        })
+                let validator = this.$validator
+                    .validateAll()
+                    .then(success => {
+                        if(success) {
+                            this.$http
+                                .post('signup', this.user)
+                                .then(
+                                    res => {
+                                        let body = res.body;
+                                        localStorage.token = body.access_token;
+                                        this.$router.push('/');
+                                    },
+                                    err => {
+                                        let errorBody = err.body;
+                                        console.log(errorBody);
+                                        if (errorBody.errors) {
+                                            this.msgs = errorBody.errors;
+                                            this.visible = true;
+                                        }
+                                    })
+                        }
+                    });
             }
         }
     }
@@ -76,6 +89,10 @@
         padding: 10px;
         color: white;
         font-size: 1em;
+    }
+
+    span {
+        font-size: 0.8em;
     }
 
     .error {

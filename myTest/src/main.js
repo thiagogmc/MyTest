@@ -4,10 +4,12 @@ import VueRouter from 'vue-router';
 import { routes } from './routes';
 import VueResource from 'vue-resource';
 import Gravatar from 'vue-gravatar';
+import VeeValidate from 'vee-validate';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.http.options.root = 'http://127.0.0.1:8000/api';
+Vue.use(VeeValidate);
 
 const router = new VueRouter({
   routes,
