@@ -39,7 +39,7 @@
                         let errorBody = err.body;
                         if (errorBody.message == 'Unauthorized') {
                             this.visible = true;
-                            this.msg = 'Usuario ou senha incorretos';
+                            this.msg = 'Wrong email or password.';
                         }
                     })
 
