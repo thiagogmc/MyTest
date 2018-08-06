@@ -1,6 +1,7 @@
 <template>
     <div>
-        <img src="https://gravatar.com/avatar/e8cfcc6cc29fdf33a961651f5b98cec8?s=200" alt="batman">
+        <!--<img src="https://gravatar.com/avatar/e8cfcc6cc29fdf33a961651f5b98cec8?s=200" alt="batman">-->
+        <v-gravatar :email="this.email" />
         <div>
             <h3>Nome: </h3>
             <p>{{ user.name }}</p>
@@ -21,7 +22,8 @@
         data() {
             return {
                 user : new User(),
-                active : 'Não'
+                active : 'Não',
+                email : ''
             }
         },
 
@@ -39,6 +41,7 @@
                         this.user.name = body.name;
                         this.user.username = body.username;
                         this.user.email = body.email;
+                        this.email = body.email;
                         this.user.active = body.active;
                         this.active = this.user.accountStatus();
                     },

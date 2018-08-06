@@ -3,6 +3,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router';
 import { routes } from './routes';
 import VueResource from 'vue-resource';
+import Gravatar from 'vue-gravatar';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -18,7 +19,9 @@ Vue.http.interceptors.push((request, next) => {
       request.headers.set('Authorization', 'Bearer ' + localStorage.getItem('token'))
     }
     next()
-})
+});
+
+Vue.component('v-gravatar', Gravatar);
 
 new Vue({
   el: '#app',
