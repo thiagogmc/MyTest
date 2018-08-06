@@ -1,6 +1,7 @@
-import signUp from './components/signUp/signUp.vue';
-import login from './components/login/loginForm.vue';
-import profile from './components/profile/profile.vue';
+const signUp = () => System.import('./components/signUp/signUp.vue');
+const login = () => System.import('./components/login/loginForm.vue');
+const profile = () => System.import('./components/profile/profile.vue');
+
 export const routes = [
     {
         path : '',

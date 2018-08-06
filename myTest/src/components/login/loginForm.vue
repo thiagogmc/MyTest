@@ -5,7 +5,7 @@
             <p class="error" v-show="visible"> {{ msg }} </p>
         </transition>
         <form @submit.prevent="loginUser()">
-            <input type="text" name="email" placeholder="Digite seu nome de usuario" v-model="user.email">
+            <input type="text" name="email" placeholder="Digite seu e-mail" v-model="user.email">
             <input type="password" name="password" placeholder="Digite sua senha" v-model="user.password">
             <button type="submit">Login</button>
         </form>
